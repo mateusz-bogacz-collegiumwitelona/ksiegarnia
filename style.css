@@ -1,0 +1,130 @@
+html, body {
+    background-color: #F72C5B;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    max-height: 200px; 
+    text-align: center;
+    background-image: url('./image/old-books-shelf-background-with-never-stop-dreaming-quote.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    overflow: hidden; 
+}
+
+.container {
+    display: flex;
+    flex: 1; /* Allow the container to grow and fill the available space */
+    width: 100%;
+}
+
+aside {
+    width: 30%;
+    background-color: #FF748B;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+
+aside a {
+    display: block; 
+    font-size: 26px;
+    color: white;
+    text-decoration: none; 
+    margin-bottom: 15px; 
+}
+
+aside a:hover {
+    color: #FFD700; 
+}
+
+main {
+    width: 70%;
+    text-align: center;
+    background-color: #A7D477;
+    overflow-x: auto; /* Allow scrolling if the table is too wide */
+}
+
+main p {
+    font-size: 25px;
+}
+
+footer {
+    text-align: center;
+    background-color: #E4F1AC;
+    color: #000;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.large-gif {
+    width: 300px;
+    height: auto; 
+}
+
+main .model {
+    display: block;
+    margin: 80px auto 0 auto; 
+    width: 90%; 
+    height: auto; 
+    max-width: 1200px; 
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap; 
+}
+
+.input-group p {
+    margin: 0 10px 0 0;
+    width: 100px;
+    font-size: 16px; 
+}
+
+.input-group input {
+    flex-grow: 1;
+    margin-right: 10px;
+    font-size: 16px; 
+    padding: 5px;
+    width: 150px;
+}
+
+input[type="submit"], input[type="reset"] {
+    font-size: 16px;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    margin: 0 auto;
+    width: 90%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000;
+}
+
+th {
+    background-color: #FF748B;
+    color: white;
+}
