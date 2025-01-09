@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Księgarnia</title>
     <link rel="icon" href="./image/books.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -22,25 +23,24 @@
             <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a>
             <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a>
             <a href="./raport.php" class="button-link">Raport ze sprzedaży</a>
-            <a href="./zakupy.php" class="button-link">Zakup</a>
         </aside>
         <main>
             <form action="mod.php" method="post">
                 <h2>Wprowadź dane klienta</h2>
 
                 <div class="input-group">
-                    <p>ID</p> <input type="number" name="id">
+                    <p>ID: </p> <input type="number" name="id" class="same_lenght">
                 </div>
                 <div class="input-group">
-                    <p>Imię: </p> <input type="text" name="name">
-                    <p>Nazwisko: </p> <input type="text" name="surname">
-                    <p>Płeć: </p> <input type="text" name="gender">
+                    <p>Imię: </p> <input type="text" name="name" class="same_lenght">
+                    <p>Nazwisko: </p> <input type="text" name="surname" class="same_lenght">
+                    <p>Płeć: </p> <input type="text" name="gender" class="same_lenght">
                 </div>
 
                 <div class="input-group">
-                    <p>Miasto: </p> <input type="text" name="city">
-                    <p>Ulica: </p> <input type="text" name="street">
-                    <p>Kod pocztowy: </p> <input type="text" name="zip">
+                    <p>Miasto: </p> <input type="text" name="city" class="same_lenght">
+                    <p>Ulica: </p> <input type="text" name="street" class="same_lenght">
+                    <p>Kod pocztowy: </p> <input type="text" name="zip" class="same_lenght">
                 </div>
 
                 <br><br>
@@ -62,12 +62,21 @@
                     if (empty($name) || empty($surname) || empty($city) || empty($street) || empty($zip) || empty($id)) {
                         echo "<h3>Proszę uzupełnić wszystkie wymagane pola.</h3>";
                     } else {
-                        $sql = "
-                            UPDATE `klienci` SET `imie` = '$name', `nazwisko` = '$surname', `miasto` = '$city', `ulica` = '$street', `kod pocztowy` = '$zip', `płeć` = '$gender' WHERE `klienci`.`id_klienta` = $id;
+                        $sql1 = "
+                            UPDATE `miasto` 
+                            SET `miasto` = '$city', `ulica` = '$street', `kod_pocztowy` = '$zip' 
+                            WHERE `id_miasta` = (SELECT `id_miasta` FROM `klienci` WHERE `id_klienta` = $id);
                         ";
-                        $result = mysqli_query($conn, $sql);
+                        $result1 = mysqli_query($conn, $sql1);
+
+                        $sql2 = "
+                            UPDATE `klienci` 
+                            SET `imie` = '$name', `nazwisko` = '$surname', `płeć` = '$gender' 
+                            WHERE `id_klienta` = $id;
+                        ";
+                        $result2 = mysqli_query($conn, $sql2);
                         
-                        if ($result) {
+                        if ($result1 && $result2) {
                             echo "<h3>Dane zostały zmodyfikowane.</h3>";
                         } else {
                             echo "<h3>Wystąpił błąd przy wprowadzaniu danych.</h3>";
@@ -79,6 +88,7 @@
                 ?>
 
             </form>
+        </main>
     </div>
     
     <footer>

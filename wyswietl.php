@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Księgarnia</title>
     <link rel="icon" href="./image/books.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -22,10 +23,9 @@
             <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a>
             <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a>
             <a href="./raport.php" class="button-link">Raport ze sprzedaży</a>
-            <a href="./zakupy.php" class="button-link">Zakup</a>
         </aside>
         <main>
-            <h2>Wyświtel Bazę</h2>
+            <h2>Wyświetl Bazę</h2>
             <form action="wyswietl.php" method="POST">
                 <button type="submit" name="database" value="clients" class="styled-button">Wyświetl bazę klientów</button>
                 <button type="submit" name="database" value="products" class="styled-button">Wyświetl bazę produktów</button>
@@ -38,13 +38,16 @@
                 } 
 
                 if ($_POST['database'] == 'clients') {
-                    $sql = 'SELECT * FROM `klienci`;';
+                    $sql = 'SELECT klienci.id_klienta, klienci.imie, klienci.nazwisko, klienci.płeć, miasto.miasto, miasto.ulica, miasto.kod_pocztowy 
+                            FROM klienci 
+                            INNER JOIN miasto ON klienci.id_miasta = miasto.id_miasta;';
                     $result = mysqli_query($conn, $sql);
+
                     echo "<div class='table-container'>
                             <table border=\"2\">
                                 <tr>
                                     <th>Id klienta</th>
-                                    <th>Imie</th>
+                                    <th>Imię</th>
                                     <th>Nazwisko</th>
                                     <th>Miasto</th>
                                     <th>Ulica</th>
@@ -56,10 +59,10 @@
                                 <td>" . $row[0] . "</td>
                                 <td>" . $row[1] . "</td>
                                 <td>" . $row[2] . "</td>
-                                <td>" . $row[3] . "</td>
                                 <td>" . $row[4] . "</td>
                                 <td>" . $row[5] . "</td>
                                 <td>" . $row[6] . "</td>
+                                <td>" . $row[3] . "</td>
                             </tr>";
                     }
                     echo "</table></div>";

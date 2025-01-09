@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Księgarnia</title>
     <link rel="icon" href="./image/books.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -22,14 +23,13 @@
             <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a>
             <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a>
             <a href="./raport.php" class="button-link">Raport ze sprzedaży</a>
-            <a href="./zakupy.php" class="button-link">Zakup</a>
         </aside>
         <main>
             <form action="kasuj.php" method="post">
                 <h2>Usuń dane klienta</h2>
 
                 <div class="input-group">
-                    <p>Podaj ID </p> <input type="number" name="id">
+                    <p>Podaj ID </p> <input type="number" name="id" class="same_lenght">
                 </div>
 
                 <br><br>
@@ -47,11 +47,14 @@
                     } else {
                         $sql = "DELETE FROM klienci WHERE `klienci`.`id_klienta` = $id;";
                         $result = mysqli_query($conn, $sql);
+
+                        $sql2 = "DELETE FROM `miasto` WHERE `miasto`.`id_miasta` NOT IN (SELECT id_miasta FROM klienci)";
+                        $result2 = mysqli_query($conn, $sql2);
                         
-                        if ($result) {
+                        if ($result && $result2) {
                             echo "<h3>Dane zostały usunięte pomyślnie.</h3>";
                         } else {
-                            echo "<h3>Wystąpił błąd przy wprowadzaniu danych.</h3>";
+                            echo "<h3>Wystąpił błąd przy usuwaniu danych.</h3>";
                         }
                     }
 

@@ -1,7 +1,7 @@
 html, body {
-    background-color: #F72C5B;
+    background-color: gray;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Lato', sans-serif;
     height: 100%;
 }
 
@@ -130,6 +130,10 @@ input[type="submit"]:hover, input[type="reset"]:hover {
 input[type="submit"]:active, input[type="reset"]:active {
     background-color: #003f7f;
     transform: scale(1);
+}
+
+.input-group input.same-length {
+    width: 200px; /* Ustaw szerokość dla pól wprowadzania */
 }
 
 .table-container {

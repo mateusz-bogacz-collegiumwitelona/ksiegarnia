@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Księgarnia</title>
     <link rel="icon" href="./image/books.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -22,22 +23,21 @@
             <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a>
             <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a>
             <a href="./raport.php" class="button-link">Raport ze sprzedaży</a>
-            <a href="./zakupy.php" class="button-link">Zakup</a>
         </aside>
         <main>
             <form action="wprowadz.php" method="post">
                 <h2>Wprowadź dane klienta</h2>
 
                 <div class="input-group">
-                    <p>Imię: </p> <input type="text" name="name">
-                    <p>Nazwisko: </p> <input type="text" name="surname">
-                    <p>Płeć: </p> <input type="text" name="gender">
+                    <p>Imię: </p> <input type="text" name="name" class="same_lenght">
+                    <p>Nazwisko: </p> <input type="text" name="surname" class="same_lenght">
+                    <p>Płeć: </p> <input type="text" name="gender" class="same_lenght">
                 </div>
 
                 <div class="input-group">
-                    <p>Miasto: </p> <input type="text" name="city">
-                    <p>Ulica: </p> <input type="text" name="street">
-                    <p>Kod pocztowy: </p> <input type="text" name="zip">
+                    <p>Miasto: </p> <input type="text" name="city" class="same_lenght">
+                    <p>Ulica: </p> <input type="text" name="street" class="same_lenght">
+                    <p>Kod pocztowy: </p> <input type="text" name="zip" class="same_lenght">
                 </div>
 
                 <br><br>
@@ -46,6 +46,10 @@
 
                 <?php
                 $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
+                if (!$conn) {
+                    die("<h3>Nie udało się połączyć z bazą danych: " . mysqli_connect_error() . "</h3>");
+                }
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     $name = $_POST["name"];
@@ -53,25 +57,30 @@
                     $gender = $_POST["gender"];
                     $city = $_POST["city"];
                     $street = $_POST["street"];
-                    $zip = $_POST["zip"];
+                    $zip = isset($_POST["zip"]) ? $_POST["zip"] : '';
 
                     if (empty($name) || empty($surname) || empty($city) || empty($street) || empty($zip)) {
                         echo "<h3>Proszę uzupełnić wszystkie wymagane pola.</h3>";
+                        return;
                     } else {
-                        $sql = "INSERT INTO `klienci` (`id_klienta`, `imie`, `nazwisko`, `miasto`, `ulica`, `kod pocztowy`, `płeć`) VALUES (NULL, '$name', '$surname', '$city', '$street', '$zip', '$gender');";
-                        $result = mysqli_query($conn, $sql);
+                        $sql1 = "INSERT INTO `miasto` (`id_miasta`, `miasto`, `ulica`, `kod_pocztowy`) VALUES (NULL, '$city', '$street', '$zip')";
+                        $result1 = mysqli_query($conn, $sql1);
                         
-                        if ($result) {
+                        $id_miasta = mysqli_insert_id($conn);
+                        $sql2 = "INSERT INTO `klienci` (`id_klienta`, `imie`, `nazwisko`, `płeć`, `id_miasta`) VALUES (NULL, '$name', '$surname', '$gender', '$id_miasta')";
+                        $result2 = mysqli_query($conn, $sql2);
+
+                        if ($result2 && $result1) {
                             echo "<h3>Dane zostały wprowadzone pomyślnie.</h3>";
                         } else {
                             echo "<h3>Wystąpił błąd przy wprowadzaniu danych.</h3>";
+                            return;
                         }
                     }
 
                     mysqli_close($conn);
                 }
                 ?>
-
             </form>
         </main>
     </div>    

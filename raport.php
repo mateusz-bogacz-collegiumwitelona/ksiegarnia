@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Księgarnia</title>
     <link rel="icon" href="./image/books.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -22,19 +23,18 @@
             <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a>
             <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a>
             <a href="./raport.php" class="button-link">Raport ze sprzedaży</a>
-            <a href="./zakupy.php" class="button-link">Zakup</a>
         </aside>
         <main>
             <h2>Wyświtel Bazę</h2>
             <form action="raport.php" method="POST">
             <div class="input-group">
-                    <p>Od: </p> <input type="text" name="od">
-                    <p>Do: </p> <input type="text" name="do">
+                    <p>Od: </p> <input type="text" name="od" class="same_lenght">
+                    <p>Do: </p> <input type="text" name="do" class="same_lenght">
                 </div>
 
                 <br><br>
-                <input type="submit" value="Wprowadź dane" class="styled-button">
-                <input type="reset" value="Wyczyść formularz" class="styled-button">
+                <input type="submit" value="Wprowadź dane" class="styled-button" class="same_lenght">
+                <input type="reset" value="Wyczyść formularz" class="styled-button" class="same_lenght">
             </form>
             <?php
             $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
