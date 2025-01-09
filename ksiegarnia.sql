@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2024 at 02:10 PM
+-- Generation Time: Sty 10, 2025 at 12:07 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -31,30 +31,58 @@ CREATE TABLE `klienci` (
   `id_klienta` int(11) NOT NULL,
   `imie` varchar(50) NOT NULL,
   `nazwisko` varchar(50) NOT NULL,
-  `miasto` varchar(50) NOT NULL,
-  `ulica` varchar(50) NOT NULL,
-  `kod pocztowy` varchar(6) NOT NULL,
-  `płeć` varchar(15) DEFAULT NULL
+  `płeć` varchar(1) NOT NULL,
+  `id_miasta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `klienci`
 --
 
-INSERT INTO `klienci` (`id_klienta`, `imie`, `nazwisko`, `miasto`, `ulica`, `kod pocztowy`, `płeć`) VALUES
-(1, 'Mateusz', 'Paździoch', 'Sulejówek', 'Plebana 21', '58-150', 'M'),
-(2, 'Anna', 'Nowak', 'Kraków', 'ul. Floriańska 2', '31-101', 'K'),
-(3, 'Piotr', 'Wiśniewski', 'Gdańsk', 'ul. Długa 3', '80-001', 'M'),
-(4, 'Maria', 'Wójcik', 'Poznań', 'ul. Półwiejska 4', '61-001', 'K'),
-(5, 'Paweł', 'Kowalczyk', 'Wrocław', 'ul. Świdnicka 5', '50-001', 'M'),
-(6, 'Katarzyna', 'Nowakowska', 'Łódź', 'ul. Piotrkowska 6', '90-001', 'K'),
-(7, 'Tomasz', 'Kaminski', 'Szczecin', 'ul. Wyszyńskiego 7', '70-001', 'M'),
-(8, 'Agnieszka', 'Lewandowska', 'Lublin', 'ul. Królewska 8', '20-001', 'K'),
-(9, 'Michał', 'Zieliński', 'Katowice', 'ul. Mariacka 9', '40-001', 'M'),
-(10, 'Ewa', 'Szymańska', 'Bydgoszcz', 'ul. Gdańska 10', '85-001', 'K'),
-(11, 'Mateusz', 'Bogacz', 'Legnica', 'Adama Mickiewcza', '58-220', 'M'),
-(13, 'Marianna ', 'Boczek', 'Sulejówek', 'Plebana 21', '58-220', 'F'),
-(14, 'Marian', 'Paździoch', 'Sulejówek', 'Plebana 21', '58-220', 'F');
+INSERT INTO `klienci` (`id_klienta`, `imie`, `nazwisko`, `płeć`, `id_miasta`) VALUES
+(1, 'fff', 'fff', 'm', 1),
+(2, 'Anna', 'Nowak', 'K', 2),
+(3, 'Piotr', 'Wiśniewski', 'M', 3),
+(4, 'Maria', 'Wójcik', 'K', 4),
+(5, 'Paweł', 'Kowalczyk', 'M', 5),
+(6, 'Katarzyna', 'Nowakowska', 'K', 6),
+(7, 'Tomasz', 'Kaminski', 'M', 7),
+(8, 'Agnieszka', 'Lewandowska', 'K', 8),
+(9, 'Michał', 'Zieliński', 'M', 9),
+(10, 'Ewa', 'Szymańska', 'K', 10),
+(11, 'Mateusz', 'Bogacz', 'M', 11),
+(12, 'Marianna', 'Boczek', 'F', 1),
+(13, 'Marian', 'Paździoch', 'F', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `miasto`
+--
+
+CREATE TABLE `miasto` (
+  `id_miasta` int(11) NOT NULL,
+  `miasto` varchar(50) NOT NULL,
+  `ulica` varchar(50) NOT NULL,
+  `kod_pocztowy` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `miasto`
+--
+
+INSERT INTO `miasto` (`id_miasta`, `miasto`, `ulica`, `kod_pocztowy`) VALUES
+(1, 'aa', 'aa', 'aa'),
+(2, 'Kraków', 'ul. Floriańska 2', '31-101'),
+(3, 'Gdańsk', 'ul. Długa 3', '80-001'),
+(4, 'Poznań', 'ul. Półwiejska 4', '61-001'),
+(5, 'Wrocław', 'ul. Świdnicka 5', '50-001'),
+(6, 'Łódź', 'ul. Piotrkowska 6', '90-001'),
+(7, 'Szczecin', 'ul. Wyszyńskiego 7', '70-001'),
+(8, 'Lublin', 'ul. Królewska 8', '20-001'),
+(9, 'Katowice', 'ul. Mariacka 9', '40-001'),
+(10, 'Bydgoszcz', 'ul. Gdańska 10', '85-001'),
+(11, 'Legnica', 'Adama Mickiewcza', '58-220');
 
 -- --------------------------------------------------------
 
@@ -115,66 +143,31 @@ CREATE TABLE `zakupy` (
 --
 
 INSERT INTO `zakupy` (`id_zakupu`, `id_klienta`, `id_produktu`, `data`) VALUES
-(1, 1, 3, '2024-11-20'),
-(2, 1, 5, '2024-11-20'),
-(3, 2, 8, '2024-11-21'),
-(4, 3, 2, '2024-11-21'),
-(5, 4, 10, '2024-11-22'),
-(6, 4, 11, '2024-11-22'),
-(7, 4, 15, '2024-11-22'),
-(8, 5, 9, '2024-11-23'),
-(9, 5, 7, '2024-11-23'),
-(10, 6, 6, '2024-11-24'),
-(11, 6, 14, '2024-11-24'),
-(12, 7, 4, '2024-11-25'),
-(13, 8, 1, '2024-11-25'),
-(14, 9, 12, '2024-11-26'),
-(15, 9, 13, '2024-11-26'),
-(16, 9, 16, '2024-11-26'),
-(17, 10, 3, '2024-11-27'),
-(18, 11, 18, '2024-11-28'),
-(19, 11, 20, '2024-11-28'),
-(22, 13, 6, '2024-11-30'),
-(23, 14, 7, '2024-12-01'),
-(24, 14, 9, '2024-12-01'),
-(25, 1, 4, '2024-12-02'),
-(26, 2, 10, '2024-12-02'),
-(27, 3, 11, '2024-12-03'),
-(28, 4, 13, '2024-12-03'),
-(29, 5, 15, '2024-12-04'),
-(30, 6, 19, '2024-12-04'),
-(31, 7, 1, '2024-12-05'),
-(32, 8, 3, '2024-12-05'),
-(33, 9, 5, '2024-12-06'),
-(34, 10, 14, '2024-12-06'),
-(35, 11, 7, '2024-12-07'),
-(37, 13, 20, '2024-12-08'),
-(38, 14, 2, '2024-12-08'),
-(39, 1, 8, '2024-12-09'),
-(40, 2, 9, '2024-12-09'),
-(41, 3, 12, '2024-12-10'),
-(42, 4, 17, '2024-12-10'),
-(43, 5, 18, '2024-12-11'),
-(44, 6, 1, '2024-12-11'),
-(45, 7, 3, '2024-12-12'),
-(46, 8, 5, '2024-12-12'),
-(47, 9, 6, '2024-12-13'),
-(48, 10, 10, '2024-12-13'),
-(49, 11, 11, '2024-12-14'),
-(51, 13, 15, '2024-12-15'),
-(52, 14, 19, '2024-12-15'),
-(53, 1, 20, '2024-12-16'),
-(54, 2, 4, '2024-12-16'),
-(55, 3, 8, '2024-12-17'),
-(56, 4, 9, '2024-12-17'),
-(57, 5, 12, '2024-12-18'),
-(58, 6, 17, '2024-12-18'),
-(59, 7, 18, '2024-12-18'),
-(60, 8, 2, '2024-12-19'),
-(61, 9, 3, '2024-12-19'),
-(62, 10, 7, '2024-12-19'),
-(63, 11, 16, '2024-12-19'),
-(65, 1, 1, '2024-12-19');
+(1, 1, 1, '2024-12-19'),
+(2, 11, 16, '2024-12-19'),
+(3, 10, 7, '2024-12-19'),
+(4, 9, 3, '2024-12-19'),
+(5, 8, 2, '2024-12-19'),
+(6, 7, 18, '2024-12-18'),
+(7, 6, 17, '2024-12-18'),
+(8, 5, 12, '2024-12-18'),
+(9, 4, 9, '2024-12-17'),
+(10, 3, 8, '2024-12-17'),
+(11, 2, 4, '2024-12-16'),
+(12, 1, 20, '2024-12-16'),
+(13, 7, 19, '2024-12-15'),
+(14, 13, 15, '2024-12-15'),
+(15, 11, 11, '2024-12-14'),
+(16, 10, 10, '2024-12-13'),
+(17, 9, 6, '2024-12-13'),
+(18, 8, 5, '2024-12-12'),
+(19, 7, 3, '2024-12-12'),
+(20, 6, 1, '2024-12-11'),
+(21, 5, 18, '2024-12-11'),
+(22, 4, 13, '2024-12-10'),
+(23, 3, 12, '2024-12-10'),
+(24, 2, 9, '2024-12-09'),
+(25, 1, 8, '2024-12-09');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -184,7 +177,14 @@ INSERT INTO `zakupy` (`id_zakupu`, `id_klienta`, `id_produktu`, `data`) VALUES
 -- Indeksy dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  ADD PRIMARY KEY (`id_klienta`);
+  ADD PRIMARY KEY (`id_klienta`),
+  ADD KEY `fk_id_miasto` (`id_miasta`);
+
+--
+-- Indeksy dla tabeli `miasto`
+--
+ALTER TABLE `miasto`
+  ADD PRIMARY KEY (`id_miasta`);
 
 --
 -- Indeksy dla tabeli `produkty`
@@ -197,8 +197,8 @@ ALTER TABLE `produkty`
 --
 ALTER TABLE `zakupy`
   ADD PRIMARY KEY (`id_zakupu`),
-  ADD KEY `fk+_idklienta` (`id_klienta`),
-  ADD KEY `fk+_idprodukt` (`id_produktu`);
+  ADD KEY `fk_id_klienta` (`id_klienta`),
+  ADD KEY `fk_id_produkt` (`id_produktu`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -211,27 +211,39 @@ ALTER TABLE `klienci`
   MODIFY `id_klienta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `miasto`
+--
+ALTER TABLE `miasto`
+  MODIFY `id_miasta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
 -- AUTO_INCREMENT for table `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_produkt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `zakupy`
 --
 ALTER TABLE `zakupy`
-  MODIFY `id_zakupu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_zakupu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `klienci`
+--
+ALTER TABLE `klienci`
+  ADD CONSTRAINT `fk_id_miasto` FOREIGN KEY (`id_miasta`) REFERENCES `miasto` (`id_miasta`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `zakupy`
 --
 ALTER TABLE `zakupy`
-  ADD CONSTRAINT `fk+_idklienta` FOREIGN KEY (`id_klienta`) REFERENCES `klienci` (`id_klienta`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk+_idprodukt` FOREIGN KEY (`id_produktu`) REFERENCES `produkty` (`id_produkt`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_klienta` FOREIGN KEY (`id_klienta`) REFERENCES `klienci` (`id_klienta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_id_produkt` FOREIGN KEY (`id_produktu`) REFERENCES `produkty` (`id_produkt`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
