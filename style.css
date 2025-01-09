@@ -12,48 +12,53 @@ body {
 
 header {
     width: 100%;
-    max-height: 200px; 
+    height: 200px; /* Ustaw wysokość nagłówka */
     text-align: center;
-    background-image: url('./image/old-books-shelf-background-with-never-stop-dreaming-quote.jpg');
-    background-size: cover;
+    background-image: url('./image/baner.png');
+    background-size: cover; /* Zmieniono na cover, aby obrazek rozciągał się na całą długość nagłówka */
     background-position: center;
     background-repeat: no-repeat;
-    color: white; 
-    padding: 20px; 
-    box-sizing: border-box; 
-    overflow: hidden; 
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+header h1 {
+    letter-spacing: 5px;
+    font-size: 5em;
 }
 
 .container {
     display: flex;
-    flex: 1; /* Allow the container to grow and fill the available space */
+    flex: 1;
     width: 100%;
 }
 
 aside {
     width: 30%;
-    background-color: #FF748B;
+    background-color: #34495E;
     padding-left: 10px;
     padding-top: 20px;
 }
 
 aside a {
-    display: block; 
+    display: block;
     font-size: 26px;
     color: white;
-    text-decoration: none; 
-    margin-bottom: 15px; 
+    text-decoration: none;
+    margin-bottom: 15px;
 }
 
 aside a:hover {
-    color: #FFD700; 
+    color: #FFD700;
 }
 
 main {
     width: 70%;
     text-align: center;
-    background-color: #A7D477;
-    overflow-x: auto; /* Allow scrolling if the table is too wide */
+    background-color: #2C3E50;
+    overflow-x: auto;
 }
 
 main p {
@@ -62,49 +67,69 @@ main p {
 
 footer {
     text-align: center;
-    background-color: #E4F1AC;
+    background-color: #7D3C98;
     color: #000;
     padding: 20px;
     width: 100%;
     box-sizing: border-box;
+    font-weight: bold;
+    font-size: 1em;
 }
 
 .large-gif {
     width: 300px;
-    height: auto; 
+    height: auto;
 }
 
 main .model {
     display: block;
-    margin: 80px auto 0 auto; 
-    width: 90%; 
-    height: auto; 
-    max-width: 1200px; 
+    margin: 80px auto 0 auto;
+    width: 90%;
+    height: auto;
+    max-width: 1200px;
 }
 
 .input-group {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 .input-group p {
     margin: 0 10px 0 0;
     width: 100px;
-    font-size: 16px; 
+    font-size: 16px;
 }
 
 .input-group input {
     flex-grow: 1;
     margin-right: 10px;
-    font-size: 16px; 
+    font-size: 16px;
     padding: 5px;
     width: 150px;
 }
 
 input[type="submit"], input[type="reset"] {
     font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+input[type="submit"]:active, input[type="reset"]:active {
+    background-color: #003f7f;
+    transform: scale(1);
 }
 
 .table-container {
@@ -116,6 +141,7 @@ table {
     margin: 0 auto;
     width: 90%;
     border-collapse: collapse;
+    border: 2px solid #000; /* Dodano obramowanie zewnętrzne tabeli */
 }
 
 th, td {
@@ -127,4 +153,24 @@ th, td {
 th {
     background-color: #FF748B;
     color: white;
+}
+
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #007BFF;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.button-link:hover {
+    background-color: #0056b3;
+    border-color: #004085;
 }
