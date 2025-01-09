@@ -45,41 +45,42 @@
                 <input type="reset" value="Wyczyść formularz" class="styled-button">
 
                 <?php
-                $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
-                if (!$conn) {
-                    die("<h3>Nie udało się połączyć z bazą danych: " . mysqli_connect_error() . "</h3>");
-                }
+                    $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
+                   
+                    if ($conn->connect_error) {
+                        die("Problem z połączeniem: " . $conn->connect_error);
+                    } 
 
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    
-                    $name = $_POST["name"];
-                    $surname = $_POST["surname"];
-                    $gender = $_POST["gender"];
-                    $city = $_POST["city"];
-                    $street = $_POST["street"];
-                    $zip = isset($_POST["zip"]) ? $_POST["zip"] : '';
-
-                    if (empty($name) || empty($surname) || empty($city) || empty($street) || empty($zip)) {
-                        echo "<h3>Proszę uzupełnić wszystkie wymagane pola.</h3>";
-                        return;
-                    } else {
-                        $sql1 = "INSERT INTO `miasto` (`id_miasta`, `miasto`, `ulica`, `kod_pocztowy`) VALUES (NULL, '$city', '$street', '$zip')";
-                        $result1 = mysqli_query($conn, $sql1);
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
-                        $id_miasta = mysqli_insert_id($conn);
-                        $sql2 = "INSERT INTO `klienci` (`id_klienta`, `imie`, `nazwisko`, `płeć`, `id_miasta`) VALUES (NULL, '$name', '$surname', '$gender', '$id_miasta')";
-                        $result2 = mysqli_query($conn, $sql2);
+                        $name = $_POST["name"];
+                        $surname = $_POST["surname"];
+                        $gender = $_POST["gender"];
+                        $city = $_POST["city"];
+                        $street = $_POST["street"];
+                        $zip = isset($_POST["zip"]) ? $_POST["zip"] : '';
 
-                        if ($result2 && $result1) {
-                            echo "<h3>Dane zostały wprowadzone pomyślnie.</h3>";
-                        } else {
-                            echo "<h3>Wystąpił błąd przy wprowadzaniu danych.</h3>";
+                        if (empty($name) || empty($surname) || empty($city) || empty($street) || empty($zip)) {
+                            echo "<h3>Proszę uzupełnić wszystkie wymagane pola.</h3>";
                             return;
-                        }
-                    }
+                        } else {
+                            $sql1 = "INSERT INTO `miasto` (`id_miasta`, `miasto`, `ulica`, `kod_pocztowy`) VALUES (NULL, '$city', '$street', '$zip')";
+                            $result1 = mysqli_query($conn, $sql1);
+                            
+                            $id_miasta = mysqli_insert_id($conn);
+                            $sql2 = "INSERT INTO `klienci` (`id_klienta`, `imie`, `nazwisko`, `płeć`, `id_miasta`) VALUES (NULL, '$name', '$surname', '$gender', '$id_miasta')";
+                            $result2 = mysqli_query($conn, $sql2);
 
-                    mysqli_close($conn);
-                }
+                            if ($result2 && $result1) {
+                                echo "<h3>Dane zostały wprowadzone pomyślnie.</h3>";
+                            } else {
+                                echo "<h3>Wystąpił błąd przy wprowadzaniu danych.</h3>";
+                                return;
+                            }
+                        }
+
+                        mysqli_close($conn);
+                    }
                 ?>
             </form>
         </main>

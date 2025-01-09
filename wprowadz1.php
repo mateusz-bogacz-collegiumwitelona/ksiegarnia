@@ -46,6 +46,11 @@
                 <?php
                 $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                    if ($conn->connect_error) {
+                        die("Problem z połączeniem: " . $conn->connect_error);
+                    } 
+                    
                     $title = $_POST["title"];
                     $author = $_POST["author"];
                     $publish = $_POST["publish"];

@@ -40,6 +40,10 @@
                 $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
+                    if ($conn->connect_error) {
+                        die("Problem z połączeniem: " . $conn->connect_error);
+                    } 
+
                     $id = $_POST['id'];
 
                     if (empty($id)) {
