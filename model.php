@@ -10,22 +10,36 @@
 </head>
 <body>
     <header>
-        <h1>Księgarnia</h1>
+        <div class="header-content">
+            <img src="./image/logo.png" alt="logo">
+        </div>
+        <div class="header-content">
+            <h1>Księgarnia</h1>
+        </div>
     </header>
     <div class="container">
-        <aside>
-            <a href="./index.php" class="button-link">Strona główna</a> <br>
-            <a href="./model.php" class="button-link">Model bazy danych</a> <br>
-            <a href="./wprowadz.php" class="button-link">Wprowadź dane klienta</a> <br>
-            <a href="./wprowadz1.php" class="button-link">Wprowadź dane książki</a> <br>
-            <a href="./wyswietl.php" class="button-link">Wyświetl dane klientów oraz książek</a> <br>
-            <a href="./kasuj.php" class="button-link">Skasuj dane klienta</a> <br>
-            <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a> <br>
-            <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a> <br>
-            <a href="./raport.php" class="button-link">Raport ze sprzedaży</a> <br>
-        </aside>
+    <aside>
+        <button onclick="window.location.href='./index.php'" class="aside-button">Strona główna</button>
+        <br>
+        <button onclick="window.location.href='./model.php'" class="aside-button">Model bazy danych</button>
+        <br>
+        <button onclick="window.location.href='./wprowadz.php'" class="aside-button">Wprowadź dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./wprowadz1.php'" class="aside-button">Wprowadź dane książki</button>
+        <br>
+        <button onclick="window.location.href='./wyswietl.php'" class="aside-button">Wyświetl dane klientów oraz książek</button>
+        <br>
+        <button onclick="window.location.href='./kasuj.php'" class="aside-button">Skasuj dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./kasuj1.php'" class="aside-button">Skasuj dane książki</button>
+        <br>
+        <button onclick="window.location.href='./mod.php'" class="aside-button">Modyfikuj dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./raport.php'" class="aside-button">Raport ze sprzedaży</button>
+        <br>
+    </aside>
         <main>
-            <div>
+            <div class="image-container">
                 <img src="./image/model.png" alt="model bazy danych" class="model">
             </div>
         </main>

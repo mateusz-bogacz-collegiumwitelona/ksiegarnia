@@ -10,34 +10,50 @@
 </head>
 <body>
     <header>
-        <h1>Księgarnia</h1>
+        <div class="header-content">
+            <img src="./image/logo.png" alt="logo">
+        </div>
+        <div class="header-content">
+            <h1>Księgarnia</h1>
+        </div>
     </header>
     <div class="container">
     <aside>
-            <a href="./index.php" class="button-link">Strona główna</a> <br>
-            <a href="./model.php" class="button-link">Model bazy danych</a> <br>
-            <a href="./wprowadz.php" class="button-link">Wprowadź dane klienta</a> <br>
-            <a href="./wprowadz1.php" class="button-link">Wprowadź dane książki</a> <br>
-            <a href="./wyswietl.php" class="button-link">Wyświetl dane klientów oraz książek</a> <br>
-            <a href="./kasuj.php" class="button-link">Skasuj dane klienta</a> <br>
-            <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a> <br>
-            <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a> <br>
-            <a href="./raport.php" class="button-link">Raport ze sprzedaży</a> <br>
-        </aside>
+        <button onclick="window.location.href='./index.php'" class="aside-button">Strona główna</button>
+        <br>
+        <button onclick="window.location.href='./model.php'" class="aside-button">Model bazy danych</button>
+        <br>
+        <button onclick="window.location.href='./wprowadz.php'" class="aside-button">Wprowadź dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./wprowadz1.php'" class="aside-button">Wprowadź dane książki</button>
+        <br>
+        <button onclick="window.location.href='./wyswietl.php'" class="aside-button">Wyświetl dane klientów oraz książek</button>
+        <br>
+        <button onclick="window.location.href='./kasuj.php'" class="aside-button">Skasuj dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./kasuj1.php'" class="aside-button">Skasuj dane książki</button>
+        <br>
+        <button onclick="window.location.href='./mod.php'" class="aside-button">Modyfikuj dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./raport.php'" class="aside-button">Raport ze sprzedaży</button>
+        <br>
+    </aside>
         <main>
             <h2>Wyświetl Bazę</h2>
             <form action="wyswietl.php" method="POST">
-                <button type="submit" name="database" value="clients" class="styled-button">Wyświetl bazę klientów</button>
-                <button type="submit" name="database" value="products" class="styled-button">Wyświetl bazę produktów</button>
+                <div class="button-group">
+                    <input type="submit" name="database" value="klienci" class="styled-button">
+                    <input type="submit" name="database" value="produkty" class="styled-button">
+                </div>
             </form>
             <?php
             $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
-            if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                if ($conn->connect_error) {
-                    die("Problem z połączeniem: " . $conn->connect_error);
-                } 
+            if (!$conn) {
+                die("Problem z połączeniem: " . mysqli_connect_error());
+            }
 
-                if ($_POST['database'] == 'clients') {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                if (isset($_POST['database']) && $_POST['database'] == 'klienci') {
                     $sql = 'SELECT klienci.id_klienta, klienci.imie, klienci.nazwisko, klienci.płeć, miasto.miasto, miasto.ulica, miasto.kod_pocztowy 
                             FROM klienci 
                             INNER JOIN miasto ON klienci.id_miasta = miasto.id_miasta;';
@@ -66,7 +82,7 @@
                             </tr>";
                     }
                     echo "</table></div>";
-                } else {
+                } elseif (isset($_POST['database']) && $_POST['database'] == 'produkty') {
                     $sql = 'SELECT * FROM `produkty`;';
                     $result = mysqli_query($conn, $sql);
                     echo "<div class='table-container'>

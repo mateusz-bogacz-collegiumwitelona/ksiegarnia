@@ -10,44 +10,68 @@
 </head>
 <body>
     <header>
+    <div class="header-content">
+        <img src="./image/logo.png" alt="logo">
+    </div>
+    <div class="header-content">
         <h1>Księgarnia</h1>
+    </div>
     </header>
     <div class="container">
         <aside>
-            <a href="./index.php" class="button-link">Strona główna</a> <br>
-            <a href="./model.php" class="button-link">Model bazy danych</a> <br>
-            <a href="./wprowadz.php" class="button-link">Wprowadź dane klienta</a> <br>
-            <a href="./wprowadz1.php" class="button-link">Wprowadź dane książki</a> <br>
-            <a href="./wyswietl.php" class="button-link">Wyświetl dane klientów oraz książek</a> <br>
-            <a href="./kasuj.php" class="button-link">Skasuj dane klienta</a> <br>
-            <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a> <br>
-            <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a> <br>
-            <a href="./raport.php" class="button-link">Raport ze sprzedaży</a> <br>
+            <button onclick="window.location.href='./index.php'" class="aside-button">Strona główna</button>
+            <br>
+            <button onclick="window.location.href='./model.php'" class="aside-button">Model bazy danych</button>
+            <br>
+            <button onclick="window.location.href='./wprowadz.php'" class="aside-button">Wprowadź dane klienta</button>
+            <br>
+            <button onclick="window.location.href='./wprowadz1.php'" class="aside-button">Wprowadź dane książki</button>
+            <br>
+            <button onclick="window.location.href='./wyswietl.php'" class="aside-button">Wyświetl dane klientów oraz książek</button>
+            <br>
+            <button onclick="window.location.href='./kasuj.php'" class="aside-button">Skasuj dane klienta</button>
+            <br>
+            <button onclick="window.location.href='./kasuj1.php'" class="aside-button">Skasuj dane książki</button>
+            <br>
+            <button onclick="window.location.href='./mod.php'" class="aside-button">Modyfikuj dane klienta</button>
+            <br>
+            <button onclick="window.location.href='./raport.php'" class="aside-button">Raport ze sprzedaży</button>
+            <br>
         </aside>
         <main>
             <form action="kasuj1.php" method="post">
                 <h2>Usuń dane książki</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <p>Wybierz książkę: </p>
+                            <select name="id" class="same_lenght">
+                            <?php 
+                                $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
+                                $sql = "SELECT `id_produkt`,`tytul`,`autor`,`wydawnictwo` FROM `produkty`;";
+                                $result = mysqli_query($conn, $sql);
 
-                <div class="input-group">
-                    <p>Podaj ID </p> <input type="number" name="id" class="same_lenght">
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='".$row['id_produkt']."'>ID: ".$row['id_produkt']." - ".$row['tytul']." (".$row['autor'].")</option>";
+                                }
+                            ?>
+                            </select>
+                        </div>
+                    </div> 
+
+                <div class="button-group">
+                    <input type="submit" value="Wprowadź dane" class="styled-button">
+                    <input type="reset" value="Wyczyść formularz" class="styled-button">
                 </div>
 
-                <br><br>
-                <input type="submit" value="Wprowadź dane" class="styled-button">
-                <input type="reset" value="Wyczyść formularz" class="styled-button">
-
                 <?php
-                $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    
                     if ($conn->connect_error) {
                         die("Problem z połączeniem: " . $conn->connect_error);
                     } 
-
                     $id = $_POST['id'];
 
                     if (empty($id)) {
-                        echo "<h3>Proszę uzupełnić wszystkie wymagane pole.</h3>";
+                        echo "<h3>Proszę wybrać książkę z listy.</h3>";
                     } else {
                         $sql = "DELETE FROM produkty WHERE `produkty`.`id_produkt` = $id;";
                         $result = mysqli_query($conn, $sql);
@@ -55,7 +79,7 @@
                         if ($result) {
                             echo "<h3>Dane zostały usunięte pomyślnie.</h3>";
                         } else {
-                            echo "<h3>Wystąpił błąd przy wprowadzaniu danych.</h3>";
+                            echo "<h3>Wystąpił błąd przy usuwaniu danych.</h3>";
                         }
                     }
 

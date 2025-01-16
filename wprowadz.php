@@ -10,39 +10,72 @@
 </head>
 <body>
     <header>
-        <h1>Księgarnia</h1>
+        <div class="header-content">
+            <img src="./image/logo.png" alt="logo">
+        </div>
+        <div class="header-content">
+            <h1>Księgarnia</h1>
+        </div>
     </header>
     <div class="container">
-        <aside>
-            <a href="./index.php" class="button-link">Strona główna</a> <br>
-            <a href="./model.php" class="button-link">Model bazy danych</a> <br>
-            <a href="./wprowadz.php" class="button-link">Wprowadź dane klienta</a> <br>
-            <a href="./wprowadz1.php" class="button-link">Wprowadź dane książki</a> <br>
-            <a href="./wyswietl.php" class="button-link">Wyświetl dane klientów oraz książek</a> <br>
-            <a href="./kasuj.php" class="button-link">Skasuj dane klienta</a> <br>
-            <a href="./kasuj1.php" class="button-link">Skasuj dane książki</a> <br>
-            <a href="./mod.php" class="button-link">Modyfikuj dane klienta</a> <br>
-            <a href="./raport.php" class="button-link">Raport ze sprzedaży</a> <br>
-        </aside>
+    <aside>
+        <button onclick="window.location.href='./index.php'" class="aside-button">Strona główna</button>
+        <br>
+        <button onclick="window.location.href='./model.php'" class="aside-button">Model bazy danych</button>
+        <br>
+        <button onclick="window.location.href='./wprowadz.php'" class="aside-button">Wprowadź dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./wprowadz1.php'" class="aside-button">Wprowadź dane książki</button>
+        <br>
+        <button onclick="window.location.href='./wyswietl.php'" class="aside-button">Wyświetl dane klientów oraz książek</button>
+        <br>
+        <button onclick="window.location.href='./kasuj.php'" class="aside-button">Skasuj dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./kasuj1.php'" class="aside-button">Skasuj dane książki</button>
+        <br>
+        <button onclick="window.location.href='./mod.php'" class="aside-button">Modyfikuj dane klienta</button>
+        <br>
+        <button onclick="window.location.href='./raport.php'" class="aside-button">Raport ze sprzedaży</button>
+        <br>
+    </aside>
         <main>
             <form action="wprowadz.php" method="post">
                 <h2>Wprowadź dane klienta</h2>
 
-                <div class="input-group">
-                    <p>Imię: </p> <input type="text" name="name" class="same_lenght">
-                    <p>Nazwisko: </p> <input type="text" name="surname" class="same_lenght">
-                    <p>Płeć: </p> <input type="text" name="gender" class="same_lenght">
+                <div class="form-row">
+                    <div class="form-group">
+                        <p>Imię:</p>
+                        <input type="text" name="name">
+                    </div>
+                    <div class="form-group">
+                        <p>Nazwisko:</p>
+                        <input type="text" name="surname">
+                    </div>
+                    <div class="form-group">
+                        <p>Płeć:</p>
+                        <input type="text" name="gender">
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <p>Miasto: </p> <input type="text" name="city" class="same_lenght">
-                    <p>Ulica: </p> <input type="text" name="street" class="same_lenght">
-                    <p>Kod pocztowy: </p> <input type="text" name="zip" class="same_lenght">
+                <div class="form-row">
+                    <div class="form-group">
+                        <p>Miasto:</p>
+                        <input type="text" name="city">
+                    </div>
+                    <div class="form-group">
+                        <p>Ulica:</p>
+                        <input type="text" name="street">
+                    </div>
+                    <div class="form-group">
+                        <p>Kod pocztowy:</p>
+                        <input type="text" name="zip">
+                    </div>
                 </div>
 
-                <br><br>
-                <input type="submit" value="Wprowadź dane" class="styled-button">
-                <input type="reset" value="Wyczyść formularz" class="styled-button">
+                <div class="button-group">
+                    <input type="submit" value="Wprowadź dane" class="styled-button">
+                    <input type="reset" value="Wyczyść formularz" class="styled-button">
+                </div>
 
                 <?php
                     $conn = mysqli_connect("localhost", "root", "", "ksiegarnia");
